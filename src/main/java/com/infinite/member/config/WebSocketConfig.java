@@ -7,6 +7,7 @@ import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
 import com.infinite.member.chat.messagehandler.ChatMessageRouter;
+import com.infinite.member.wsfilters.ZChatHandshakeInterceptor;
 
 @Configuration
 @EnableWebSocket
@@ -16,7 +17,8 @@ public class WebSocketConfig implements WebSocketConfigurer{
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 		
-		registry.addHandler(chatMessageRouter, "/zchat");
+		registry.addHandler(chatMessageRouter, "/zchat")
+		.addInterceptors(new ZChatHandshakeInterceptor());
 		
 	}
 	

@@ -47,6 +47,9 @@ public class WebSocketCORSFilter implements Filter {
 				
 				String[] temp = temp1.split(",");
 				response.setHeader("Sec-WebSocket-Protocol", temp[0]);
+				request.setAttribute("userid", temp[0]);
+				request.setAttribute("domain", temp[1]);
+				request.setAttribute("auth-token", temp[2]);
 			}
 		}
 		chain.doFilter(request, response);

@@ -10,7 +10,7 @@
         let ws;
 
         function connect() {
-            ws = new WebSocket("ws://localhost:9091/zchat",[document.getElementById("name").value,"4354353","324324234"]);
+            ws = new WebSocket("ws://localhost:9091/zchat",[document.getElementById("name").value,"prime","324324234"]);
             ws.onmessage = function (e) {
                 printMessage(e.data);
             }

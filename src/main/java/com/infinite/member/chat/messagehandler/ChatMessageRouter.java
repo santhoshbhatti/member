@@ -29,15 +29,20 @@ public class ChatMessageRouter extends TextWebSocketHandler {
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		super.afterConnectionEstablished(session);
 		webSocketSessions.add(session);
+		//{domain= prime, userid=shiva, auth-token= 324324234}
+		var userId = session.getAttributes().get("userid").toString();
+		var domain = session.getAttributes().get("domain").toString();
+		var authToken = session.getAttributes().get("auth-token").toString();
+		websocketSessionStore.storeSession(userId, domain, session.getId(), session);
 		HttpHeaders headers = session.getHandshakeHeaders();
 		System.out.println(headers);
 		//("X-User-Id");headers.add("X-Auth-Token");headers.add("schemaName")
-		List<String> groupIds = headers.get("X-User-Id");
-		List<String> groupKeys = headers.get("X-Auth-Token");
-		List<String> groupDomain = headers.get("schemaName");
-		log.info(groupIds.toString());
-		log.info(groupKeys.toString());
-		log.info(groupDomain.toString());
+		/*
+		 * List<String> groupIds = headers.get("X-User-Id"); List<String> groupKeys =
+		 * headers.get("X-Auth-Token"); List<String> groupDomain =
+		 * headers.get("schemaName"); log.info(groupIds.toString());
+		 * log.info(groupKeys.toString()); log.info(groupDomain.toString());
+		 */
 	}
 
 	@Override
