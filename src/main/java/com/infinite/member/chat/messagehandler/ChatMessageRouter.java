@@ -54,6 +54,8 @@ public class ChatMessageRouter extends TextWebSocketHandler {
 	@Override
 	public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
 		super.handleMessage(session, message);
+		
+		//publish the message to redis topic
 		for (WebSocketSession webSocketSession : webSocketSessions) {
 			webSocketSession.sendMessage(message);
 		}
